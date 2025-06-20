@@ -1,8 +1,28 @@
-export default function IncidentForm({ onClose }) {
+import { useState } from "react";
+
+export default function IncidentForm({ onClose, onAddIncident }) {
+  const [incidentMessage, setIncidentMessage] = useState("");
+  const [incidentStatus, setIncidentStatus] = useState("ouvert");
+
+  console.log("Message incident:", incidentMessage);
+  console.log("Message Status:", incidentStatus);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newIncident = {
+      id: Date.now(),
+      description: incidentMessage,
+      status: incidentStatus,
+    };
+
+    onAddIncident(newIncident);
+  };
+
   return (
     <div className="fixed inset-0 bg-slate-800/75 flex items-center justify-center">
       <form
-        action=""
+        onSubmit={handleSubmit}
         className="border border-blue-300 p-8 rounded-lg bg-gray-900 w-full max-w-lg mx-4"
       >
         <div className="w-full flex flex-col space-y-3">
@@ -12,10 +32,15 @@ export default function IncidentForm({ onClose }) {
           <textarea
             className="h-24 text-gray-200 border placeholder:text-gray-300 border-white rounded-lg resize-none p-2"
             placeholder="Décrivez l'incident"
+            value={incidentMessage}
+            onChange={(e) => setIncidentMessage(e.target.value)}
           ></textarea>
-          <select className="text-gray-200 bg-gray-900 border border-gray-100 rounded p-1">
-            <option value="">Ouvert</option>
-            <option value="">Résolu</option>
+          <select
+            className="text-gray-200 bg-gray-900 border border-gray-100 rounded p-1"
+            onChange={(e) => setIncidentStatus(e.target.value)}
+          >
+            <option value="ouvert">Ouvert</option>
+            <option value="résolu">Résolu</option>
           </select>
         </div>
         <div className="flex space-x-4 mt-4">
