@@ -37,7 +37,7 @@ export default function Home() {
         )}
 
       <div className="border rounded-lg border-gray-200 shadow-white shadow-lg p-10 max-w-2xl w-full">
-        <h1 className="text-white text-2xl mb-3">
+        <h1 className="text-white text-3xl font-bold mb-6">
           Gestion des incidents
         </h1>
 
@@ -69,15 +69,15 @@ export default function Home() {
               ({ id, description, status, resolvedAt }) => (
                 <li
                   key={id}
-                  className="border-b border-gray-700 py-2 space-y-1"
+                  className="bg-gray-800 rounded-lg p-4 shadow mb-3 border border-gray-700"
                 >
                   <p>
                     <strong>Description:</strong> {description}
                   </p>
 
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 my-2">
                     <span
-                      className={`inline-block px-2 py-1 text-sm rounded font-semibold ${
+                      className={`text-sm font-semibold px-2 py-1 rounded ${
                         status === "résolu"
                           ? "bg-green-500 text-green-100"
                           : "bg-yellow-500 text-yellow-100"
@@ -128,7 +128,7 @@ export default function Home() {
                   <button
                     onClick={() => handleDelete(id)}
                     disabled={status !== "résolu"}
-                    className={`mt-1 cursor-pointer ${
+                    className={`my-1 cursor-pointer ${
                       status === "résolu"
                         ? "text-red-400 hover:underline"
                         : "text-gray-500 cursor-not-allowed"
